@@ -9,6 +9,7 @@ const News = (props) => {
   const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(1)
   const [totalResults, setTotalresults] = useState(0)
+  const apiKey = process.env.REACT_APP_NEWS_API;
 
 
 
@@ -19,9 +20,10 @@ const News = (props) => {
 
   const updatenews = async () => {
     props.setProgress(10);
-
-    const url = `https://newsapi.org/v2/everything?q=${props.category}&apiKey=15950d0d96974b4da6b941feb5312dcb&language=en`
-    // `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=15950d0d96974b4da6b941feb5312dcb&page=${page}&pagesize=${props.pagesize}`;
+    // const response = await fetch('https://enchantingly-massive-narwhal-gadget-dev.wayscript.cloud/api', { mode: 'no-cors' });
+    // let parseddata2 = await response.json();
+    // console.log(parseddata2)
+    const url = `https://newsapi.org/v2/everything?q=${props.category}&apiKey=${apiKey}&language=en`
     setLoading(true);
     let data = await fetch(url);
     props.setProgress(30);
@@ -37,7 +39,7 @@ const News = (props) => {
   useEffect(() => {
     updatenews();
 
-    document.title = `${capitalize(props.category)} - NewsMonkey`;
+    document.title = `${capitalize(props.category)} - NewsScoop`;
     //eslint-disable-next-line
   }, [])
 
